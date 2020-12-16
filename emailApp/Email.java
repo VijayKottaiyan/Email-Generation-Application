@@ -5,8 +5,9 @@ import java.util.*;
 public class Email {
     private String firstName, lastName;
     private String department;
-    private String companyName = "A to Z" ;
-    private String password;
+    private String companyName = "AtoZ" ;
+    private String email, password;
+    private int passwordLength = 10;
     private String alternateEmail;
     private int mailboxCapacity;
 
@@ -16,13 +17,20 @@ public class Email {
         System.out.println("Welcome to "+companyName+", "+this.firstName+" "+this.lastName);
 
         department = setDepartment();
+        
+        this.email = this.firstName+"."+this.lastName+"@"+department+"."+companyName+".org";
+        System.out.println("Your mail id : "+this.email);
+
+        this.password = randomPassword(passwordLength);
+        System.out.println("Your password is : "+password);
     }
     
     private String setDepartment() {
         Scanner scn = new Scanner(System.in);
         System.out.println("Select your Department \n 1 - Sales \n 2 - Developement \n 3 - Accounting \n 0 - None");
         int choice = scn.nextInt();
-        
+        scn.close();
+
         if(choice == 1){
             return "sales";
         }
@@ -35,5 +43,15 @@ public class Email {
         else{
             return " ";
         }
+    }
+
+    private String randomPassword(int passwordLength){
+        String passwordSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#!&_";
+        char[] password = new char[passwordLength];
+        for(int i = 0; i < passwordLength; i++){
+            int random = (int) (Math.random() * passwordSet.length());
+            password[i] = passwordSet.charAt(random);
+        }
+        return new String(password);
     }
 }
