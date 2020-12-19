@@ -5,11 +5,12 @@ import java.util.*;
 public class Email {
     private String firstName, lastName;
     private String department;
-    private String companyName = "AtoZ" ;
+    private String companyName = "company" ;
     private String email, password;
-    private int passwordLength = 10;
+    private int defaultPasswordLength = 10;
     private String alternateEmail;
     private int mailboxCapacity;
+    Scanner scn = new Scanner(System.in);
 
     public Email(String firstName, String lastName){
         this.firstName = firstName;
@@ -18,27 +19,26 @@ public class Email {
 
         department = setDepartment();
         
-        this.email = this.firstName+"."+this.lastName+"@"+department+"."+companyName+".org";
-        System.out.println("Your mail id : "+this.email);
+        this.email = this.firstName+"."+this.lastName+"@"+department+companyName+".org";
+        System.out.println("\nYour mail id : "+this.email);
 
-        this.password = randomPassword(passwordLength);
+        this.password = randomPassword(defaultPasswordLength);
         System.out.println("Your password is : "+password);
     }
     
     private String setDepartment() {
-        Scanner scn = new Scanner(System.in);
         System.out.println("Select your Department \n 1 - Sales \n 2 - Developement \n 3 - Accounting \n 0 - None");
+        System.out.print("\nEnter Your Department Code: ");
         int choice = scn.nextInt();
-        scn.close();
 
         if(choice == 1){
-            return "sales";
+            return "sales.";
         }
         else if(choice == 2){
-            return "dev";
+            return "dev.";
         }
         else if(choice == 3){
-            return "accnts";
+            return "accnts.";
         }
         else{
             return " ";
@@ -53,5 +53,35 @@ public class Email {
             password[i] = passwordSet.charAt(random);
         }
         return new String(password);
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setAlternateMail(String email){
+        this.email = email;
+    }
+
+    public void setMailCapcity(int Capacity){
+        this.mailboxCapacity = Capacity;
+    }
+
+    public String getInfo(){
+        return "Display Name: "+firstName+" "+lastName+
+            "Mail ID: "+email+
+            "Mail Capacity: "+mailboxCapacity;
+    }
+
+    public void dispMenu(){
+        int choice;
+        do{
+            System.out.print("\n1 to Change Mail ID \n2 to Change Password \n3 to change MailBox Capacity \n0 to Exit \n What do you want to Do?  ");
+            choice = scn.nextInt();
+            if(choice == 1){
+                System.out.print("Enter the Mail ID: ");
+                String mailID = scn.nextLine();
+                setAlternateMail(mailID);
+            }
+        }while(choice != 0);
     }
 }
