@@ -2,7 +2,7 @@ package emailApp;
 
 import java.util.*;
 
-class App{
+class EmailApp{
     public static void main(String args[]){
         Scanner scn= new Scanner(System.in);
         String firstName, lastName, mailID, password;
