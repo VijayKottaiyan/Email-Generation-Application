@@ -8,8 +8,7 @@ public class Email {
     private String companyName = "company" ;
     private String email, password;
     private int defaultPasswordLength = 10;
-    private String alternateEmail;
-    private int mailboxCapacity;
+    private int mailboxCapacity = 100;
     Scanner scn = new Scanner(System.in);
 
     public Email(String firstName, String lastName){
@@ -67,21 +66,8 @@ public class Email {
     }
 
     public String getInfo(){
-        return "Display Name: "+firstName+" "+lastName+
-            "Mail ID: "+email+
-            "Mail Capacity: "+mailboxCapacity;
-    }
-
-    public void dispMenu(){
-        int choice;
-        do{
-            System.out.print("\n1 to Change Mail ID \n2 to Change Password \n3 to change MailBox Capacity \n0 to Exit \n What do you want to Do?  ");
-            choice = scn.nextInt();
-            if(choice == 1){
-                System.out.print("Enter the Mail ID: ");
-                String mailID = scn.nextLine();
-                setAlternateMail(mailID);
-            }
-        }while(choice != 0);
+        return "\n\nDisplay Name: "+firstName+" "+lastName+
+            "\nMail ID: "+email+
+            "\nMail Capacity: "+mailboxCapacity+" Mb";
     }
 }
